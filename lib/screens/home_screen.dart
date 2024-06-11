@@ -1,4 +1,7 @@
+import 'package:doctor_booking_app/modules/widgets/avatars/circle_avatar_with_text.dart';
+import 'package:doctor_booking_app/modules/widgets/titles/section_title.dart';
 import 'package:flutter/material.dart';
+import 'package:models/models.dart';
 
 class HomScreen extends StatelessWidget {
   const HomScreen({super.key});
@@ -43,7 +46,7 @@ class HomeView extends StatelessWidget {
               children: [
                 const Icon(
                   Icons.location_on,
-                  color: Colors.redAccent,
+                  color: Color(0xff9c254d),
                   size: 20,
                 ),
                 const SizedBox(width: 4.0),
@@ -52,10 +55,10 @@ class HomeView extends StatelessWidget {
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall
-                      ?.copyWith(color: Colors.redAccent),
+                      ?.copyWith(color: Color(0xff9c254d)),
                 ),
                 const SizedBox(width: 4.0),
-                const Icon(Icons.expand_more, color: Colors.redAccent),
+                const Icon(Icons.expand_more, color: Color(0xff9c254d)),
               ],
             ),
           ],
@@ -91,6 +94,38 @@ class HomeView extends StatelessWidget {
           ),
         ),
       ),
+      body: const SingleChildScrollView(
+        padding: EdgeInsets.all(8),
+        child: Column(
+          children: [_DoctorCatogories()],
+        ),
+      ),
+    );
+  }
+}
+
+class _DoctorCatogories extends StatelessWidget {
+  const _DoctorCatogories({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SectionTitle(
+          title: 'Categories',
+          action: 'See all',
+          onPressed: () {},
+        ),
+        Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: DoctorCategory.values
+                .take(5)
+                .map((category) => Expanded(
+                      child: CircleAvatarWithTextLabel(
+                          icon: category.icon, label: category.name),
+                    ))
+                .toList())
+      ],
     );
   }
 }
